@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickDeliver - Survey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background Elements */
+        .bg-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .bg-bubbles li {
+            position: absolute;
+            list-style: none;
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.15);
+            bottom: -160px;
+            border-radius: 50%;
+            animation: square 25s infinite;
+            transition-timing-function: linear;
+        }
+        
+        .bg-bubbles li:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .bg-bubbles li:nth-child(2) {
+            left: 20%;
+            animation-delay: 2s;
+            animation-duration: 17s;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .bg-bubbles li:nth-child(3) {
+            left: 25%;
+            animation-delay: 4s;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .bg-bubbles li:nth-child(4) {
+            left: 40%;
+            animation-delay: 0s;
+            animation-duration: 22s;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .bg-bubbles li:nth-child(5) {
+            left: 70%;
+            animation-delay: 3s;
+            width: 70px;
+            height: 70px;
+        }
+        
+        .bg-bubbles li:nth-child(6) {
+            left: 80%;
+            animation-delay: 2s;
+            width: 90px;
+            height: 90px;
+        }
+        
+        .bg-bubbles li:nth-child(7) {
+            left: 32%;
+            animation-delay: 6s;
+            width: 110px;
+            height: 110px;
+        }
+        
+        .bg-bubbles li:nth-child(8) {
+            left: 55%;
+            animation-delay: 8s;
+            animation-duration: 18s;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .bg-bubbles li:nth-child(9) {
+            left: 25%;
+            animation-delay: 9s;
+            animation-duration: 20s;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .bg-bubbles li:nth-child(10) {
+            left: 90%;
+            animation-delay: 11s;
+            width: 80px;
+            height: 80px;
+        }
+        
+        @keyframes square {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 50%;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.8s ease-out;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: rotate(30deg);
+            z-index: -1;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo-icon {
+            font-size: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 10px rgba(106, 17, 203, 0.3));
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+        
+        h1 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+        }
+        
+        .tagline {
+            color: var(--secondary);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover::before {
+            transform: translateY(0);
+        }
+        
+        .btn-english {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .btn-odia {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff2c00 100%);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .language-icon {
+            font-size: 22px;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 8px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(106, 17, 203, 0.08);
+            width: 110px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature i {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .feature span {
+            font-size: 13px;
+            color: var(--dark);
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .footer p {
+            margin-bottom: 0;
+        }
+        
+        .counter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .counter-item {
+            background: rgba(106, 17, 203, 0.1);
+            padding: 8px 12px;
+            border-radius: 10px;
+            min-width: 70px;
+        }
+        
+        .counter-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .counter-text {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            .container {
+                padding: 25px 20px;
+                margin: 15px 0;
+            }
+            
+            .logo-icon {
+                font-size: 45px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .tagline {
+                font-size: 15px;
+            }
+            
+            p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            
+            .btn {
+                padding: 14px 18px;
+                font-size: 15px;
+            }
+            
+            .features {
+                margin: 20px 0;
+            }
+            
+            .feature {
+                width: 100px;
+                margin: 5px;
+                padding: 10px;
+            }
+            
+            .feature i {
+                font-size: 20px;
+            }
+            
+            .feature span {
+                font-size: 12px;
+            }
+            
+            .counter {
+                gap: 10px;
+            }
+            
+            .counter-item {
+                padding: 6px 10px;
+                min-width: 60px;
+            }
+            
+            .counter-number {
+                font-size: 18px;
+            }
+            
+            .counter-text {
+                font-size: 10px;
+            }
+            
+            .footer {
+                margin-top: 25px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .logo-icon {
+                font-size: 40px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .feature {
+                width: 85px;
+            }
+            
+            .feature i {
+                font-size: 18px;
+            }
+            
+            .feature span {
+                font-size: 11px;
+            }
+            
+            .counter {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .counter-item {
+                width: 100px;
+            }
+        }
+        
+        /* For very small devices */
+        @media (max-width: 320px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px 12px;
+                border-radius: 15px;
+            }
+            
+            .logo-icon {
+                font-size: 35px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .tagline {
+                font-size: 14px;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                width: 100%;
+                max-width: 150px;
+                margin-bottom: 8px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .feature i {
+                margin-bottom: 0;
+            }
+            
+            .btn {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </div>
+    
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-solid fa-truck-fast logo-icon"></i>
+        </div>
+        
+        <h1>QuickDeliver Survey</h1>
+        <div class="tagline">Your Opinion Shapes Our Service</div>
+        <p>Help us improve our delivery service by sharing your experience. Select your preferred language to begin the survey.</p>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <span>Fast Delivery</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-utensils"></i>
+                <span>Food & Grocery</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <span>24/7 Support</span>
+            </div>
+        </div>
+        
+        <div class="counter">
+            <div class="counter-item">
+                <div class="counter-number">2,540+</div>
+                <div class="counter-text">Surveys Completed</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number">94%</div>
+                <div class="counter-text">Satisfaction Rate</div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-english" onclick="redirectToEnglishForm()">
+                <i class="fas fa-language language-icon"></i>
+                English Form
+            </button>
+            
+            <button class="btn btn-odia" onclick="redirectToOdiaForm()">
+                <i class="fas fa-language language-icon"></i>
+                Odia Form
+            </button>
+        </div>
+        
+        <div class="footer">
+            <p>Your feedback helps us serve you better ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function redirectToEnglishForm() {
+            // Add button click animation
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.98)';
+            
+            setTimeout(() => {
+                window.location.href = 'https://forms.gle/57zXQtRQ2TH83GMdA';
+            }, 300);
+        }
+        
+        function redirectToOdiaForm() {
+            // Add button click animation
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.98)';
+            
+            setTimeout(() => {
+                window.location.href = 'https://forms.gle/fBek2QGyMgY4cFw67';
+            }, 300);
+        }
+        
+        // Animate counter numbers when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure counter is visible
+            const counter = document.querySelector('.counter');
+            counter.style.opacity = 1;
+            counter.style.visibility = 'visible';
+            
+            const counters = document.querySelectorAll('.counter-number');
+            counters.forEach(counter => {
+                const target = counter.innerText.includes('+') ? 
+                    parseInt(counter.innerText.replace('+', '').replace(',', '')) : 
+                    parseInt(counter.innerText.replace('%', ''));
+                
+                let count = 0;
+                const increment = target / 100;
+                
+                const updateCounter = () => {
+                    if (count < target) {
+                        count += increment;
+                        if (counter.innerText.includes('+')) {
+                            counter.innerText = Math.ceil(count).toLocaleString() + '+';
+                        } else if (counter.innerText.includes('%')) {
+                            counter.innerText = Math.ceil(count) + '%';
+                        } else {
+                            counter.innerText = Math.ceil(count);
+                        }
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        if (counter.innerText.includes('+')) {
+                            counter.innerText = target.toLocaleString() + '+';
+                        } else if (counter.innerText.includes('%')) {
+                            counter.innerText = target + '%';
+                        } else {
+                            counter.innerText = target;
+                        }
+                    }
+                };
+                
+                updateCounter();
+            });
+        });
+    </script>
+</body>
+</html>
